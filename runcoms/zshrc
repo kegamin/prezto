@@ -110,7 +110,7 @@ fi
 if [[ -f $HOME/.zsh/zaw/zaw.zsh ]]; then
   source $HOME/.zsh/zaw/zaw.zsh
   bindkey '^j^j' zaw-cdr
-  bindkey '^j^h' zaw-history
+  bindkey '^j^r' zaw-history
   bindkey '^j^t' zaw-tmux
   bindkey '^j^p' zaw-process
   bindkey '^j^s' zaw-searcher
