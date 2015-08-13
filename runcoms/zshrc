@@ -10,42 +10,55 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+###################################################
+# zsh configs
+###################################################
 
 # -------------------------------------------------
-# zsh alias
+# prezto options
+
+# ディレクトリ名でcdを可能にする
+setopt auto_cd
+# 補完機能. 個別にOFFりたい場合は、 alias git="nocorrect git"とか無効に
+# やっぱ邪魔なのでOFFる
+unsetopt correct
+# 補完時の表示をコンパクトにする
+setopt list_packed
+
+# ヒストリー定義
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=$HISTSIZE
+# ヒストリファイルにコマンドラインだけではなく実行時刻と実行時間も保存する。
+setopt extended_history
+# 同じコマンドラインを連続で実行した場合はヒストリに登録しない。
+setopt hist_ignore_dups
+# スペースで始まるコマンドラインはヒストリに追加しない。
+setopt hist_ignore_space
+# すぐにヒストリファイルに追記する。
+setopt inc_append_history
+# zshプロセス間でヒストリを共有する。
+setopt share_history
+# C-sでのヒストリ検索が潰されてしまうため、出力停止・開始用にC-s/C-qを使わない。
+setopt no_flow_control
+
+# コマンド補完定義
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':completion:*:*:cdr:*:*' menu selection
+zstyle ':completion:*' recent-dirs-insert both
+zstyle ':chpwd:*' recent-dirs-max 500
+zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':chpwd:*' recent-dirs-pushd true
+zstyle ':filter-select:highlight' matched fg=yellow,standout
+zstyle ':filter-select' case-insensitive yes
+zstyle ':filter-select' extended-search yes
+
+# -------------------------------------------------
+# aliases
+
 alias vi='vim'
 alias htop='sudo htop'
-
-if [[ -f $HOME/.zsh/antigen/antigen.zsh ]]; then
-  source $HOME/.zsh/antigen/antigen.zsh
-  # Load the oh-my-zsh's library.
-  #antigen use oh-my-zsh
-
-  # Tell antigen that you're done.
-  #antigen-apply
-  #
-fi
-
-if [[ -f $HOME/.zsh/cool-peco/cool-peco ]]; then
-  source $HOME/.zsh/cool-peco/cool-peco
-  zle -N cool-peco-ps
-  zle -N cool-peco-ghq
-  zle -N cool-peco-history
-  zle -N cool-peco-filename-search
-  bindkey '^p^p' cool-peco-ps
-  bindkey '^p^g' cool-peco-ghq
-  bindkey '^p^r' cool-peco-history
-  bindkey '^p^s' cool-peco-filename-search
-fi
-
-if [[ -f $HOME/.zsh/z/z.sh ]]; then
-  source $HOME/.zsh/z/z.sh
-fi
-
-if [ -d $HOME/.anyenv ] ; then
-    eval "$(anyenv init - zsh)"
-fi
 
 # for work environment ( override if needed )
 if [ -f $HOME/.zshrc.work ]; then
@@ -62,40 +75,71 @@ if [ -f $(brew --prefix)/etc/brew-wrap ];then
   source $(brew --prefix)/etc/brew-wrap
 fi
 
-# -------------------------------------------------
-# history
-
-HISTFILE=~/.zsh_history
-HISTSIZE=10000000
-SAVEHIST=$HISTSIZE
-## ヒストリファイルにコマンドラインだけではなく実行時刻と実行時間も保存する。
-setopt extended_history
-## 同じコマンドラインを連続で実行した場合はヒストリに登録しない。
-setopt hist_ignore_dups
-## スペースで始まるコマンドラインはヒストリに追加しない。
-setopt hist_ignore_space
-## すぐにヒストリファイルに追記する。
-setopt inc_append_history
-## zshプロセス間でヒストリを共有する。
-setopt share_history
-## C-sでのヒストリ検索が潰されてしまうため、出力停止・開始用にC-s/C-qを使わない。
-setopt no_flow_control
+###################################################
+# zsh plugins
+###################################################
 
 # -------------------------------------------------
-# zsh options
-# ディレクトリ名でcdを可能にする
-setopt auto_cd
-# 補完機能. 個別にOFFりたい場合は、 alias git="nocorrect git"とか無効に
-# やっぱ邪魔なのでOFFる
-unsetopt correct
+# antigen
+# https://github.com/zsh-users/antigen.git
 
-# 補完時の表示をコンパクトにする
-setopt list_packed
+if [[ -f $HOME/.zsh/antigen/antigen.zsh ]]; then
+  source $HOME/.zsh/antigen/antigen.zsh
+  # Load the oh-my-zsh's library.
+  #antigen use oh-my-zsh
+
+  # Tell antigen that you're done.
+  #antigen-apply
+  #
+fi
 
 # -------------------------------------------------
-# shell functions.
-dotfiles=$HOME/dotfiles
+# cool-peco
+# https://github.com/ryoppy/cool-peco
 
-for textfile in $( ls $dotfiles/etc/profile/*.sh ); do
-  source $textfile
+if [[ -f $HOME/.zsh/cool-peco/cool-peco ]]; then
+  source $HOME/.zsh/cool-peco/cool-peco
+  zle -N cool-peco-ghq
+  bindkey '^j^g' cool-peco-ghq
+fi
+
+# -------------------------------------------------
+# zaw
+# https://github.com/zsh-users/zaw
+
+if [[ -f $HOME/.zsh/zaw/zaw.zsh ]]; then
+  source $HOME/.zsh/zaw/zaw.zsh
+  bindkey '^j^j' zaw-cdr
+  bindkey '^j^h' zaw-history
+  bindkey '^j^t' zaw-tmux
+  bindkey '^j^p' zaw-process
+  bindkey '^j^s' zaw-searcher
+  bindkey '^g^s' zaw-git-status
+  bindkey '^g^f' zaw-git-files
+  bindkey '^g^b' zaw-git-branches
+fi
+
+# -------------------------------------------------
+# z
+# https://github.com/rupa/z
+
+if [[ -f $HOME/.zsh/z/z.sh ]]; then
+  source $HOME/.zsh/z/z.sh
+  # _zだけでなくzでもTAB補完ができるようにする
+  compctl -U -K _z_zsh_tab_completion ${_Z_CMD:-z}
+fi
+
+# -------------------------------------------------
+# anyenv
+# https://github.com/riywo/anyenv
+
+if [ -d $HOME/.anyenv ] ; then
+    eval "$(anyenv init - zsh)"
+fi
+
+# -------------------------------------------------
+# my profiles
+
+for rcfiles in $( ls $HOME/dotfiles/etc/profile/*.sh ); do
+  source $rcfiles
 done
