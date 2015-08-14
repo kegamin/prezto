@@ -58,7 +58,6 @@ path=(
   $HOME/dotfiles/bin(N-/)        # original dotfiles bin
   $HOME/.cabal/bin(N-/)          # haskel package manager
   $HOME/.anyenv/bin(N-/)         # anyenv(plenv,ndenv,rbenv...)
-  $GOROOT/bin(N-/)               # Go
   $GOPATH/bin(N-/)               # Go
   /usr/texbin(N-/)               # tex
   /usr/local/heroku/bin(N-/)     # heroku toolbelt
