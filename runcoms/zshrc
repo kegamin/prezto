@@ -77,8 +77,10 @@ if [ -f ~/.brew_api_token ];then
 fi
 
 # set brew-file wrapper
-if [ -f $(brew --prefix)/etc/brew-wrap ];then
-  source $(brew --prefix)/etc/brew-wrap
+if (( ${+commands[brew]} )); then
+  if [ -f $(brew --prefix)/etc/brew-wrap ];then
+    source $(brew --prefix)/etc/brew-wrap
+  fi
 fi
 
 ###################################################
