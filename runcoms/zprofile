@@ -55,14 +55,14 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 # (N-/): 存在しないディレクトリは登録しない。
 path=(
-  $HOME/dotfiles/bin(N-/)        # original dotfiles bin
-  $HOME/.cabal/bin(N-/)          # haskel package manager
-  $HOME/.anyenv/bin(N-/)         # anyenv(plenv,ndenv,rbenv...)
-  $GOPATH/bin(N-/)               # Go
+  $HOME/dotfiles/bin             # original dotfiles bin
+  $HOME/.cabal/bin               # haskel package manager
+  $HOME/.anyenv/bin              # anyenv(plenv,ndenv,rbenv...)
+  $GOPATH/bin                    # Go
   /usr/texbin(N-/)               # tex
   /usr/local/heroku/bin(N-/)     # heroku toolbelt
-  /usr/local/bin(N-/)
-  /usr/local/sbin(N-/)
+  /usr/local/bin
+  /usr/local/sbin
   $path
 )
 
