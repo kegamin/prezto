@@ -57,8 +57,14 @@ zstyle ':filter-select' extended-search yes
 # -------------------------------------------------
 # aliases
 
-alias vi='vim'
 alias htop='sudo htop'
+
+if (( ${+commands[vim]} )); then
+  alias vi='vim'
+fi
+
+# -------------------------------------------------
+# user environment
 
 # for work environment ( override if needed )
 if [ -f $HOME/.zshrc.work ]; then
