@@ -93,22 +93,19 @@ fi
 
 if [[ -f $HOME/.zsh/antigen/antigen.zsh ]]; then
   source $HOME/.zsh/antigen/antigen.zsh
-  # Load the oh-my-zsh's library.
-  #antigen use oh-my-zsh
 
-  # Tell antigen that you're done.
-  #antigen-apply
-  #
-fi
+  # 独自追加したanyframeの関数を呼ぶための設定
+  fpath=($HOME/.zsh/anyframe-custom(N-/) $fpath)
 
-# -------------------------------------------------
-# cool-peco
-# https://github.com/ryoppy/cool-peco
+  antigen bundle mollifier/anyframe
+  bindkey '^j^j' anyframe-widget-cdr
+  bindkey '^j^r' anyframe-widget-execute-history
+  bindkey '^j^g' anyframe-widget-cd-ghq-repository
+  bindkey '^j^t' anyframe-widget-tmux-attach
+  bindkey '^v^v' anyframe-widget-vagrant
+  bindkey '^v^j' anyframe-widget-vagrant-cdr
 
-if [[ -f $HOME/.zsh/cool-peco/cool-peco ]]; then
-  source $HOME/.zsh/cool-peco/cool-peco
-  zle -N cool-peco-ghq
-  bindkey '^j^g' cool-peco-ghq
+  antigen-apply
 fi
 
 # -------------------------------------------------
@@ -117,9 +114,8 @@ fi
 
 if [[ -f $HOME/.zsh/zaw/zaw.zsh ]]; then
   source $HOME/.zsh/zaw/zaw.zsh
-  bindkey '^j^j' zaw-cdr
-  bindkey '^j^r' zaw-history
-  bindkey '^j^t' zaw-tmux
+  # bindkey '^j^r' zaw-history
+  # bindkey '^j^t' zaw-tmux
   bindkey '^j^p' zaw-process
   bindkey '^j^s' zaw-searcher
   bindkey '^g^s' zaw-git-status
