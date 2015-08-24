@@ -104,6 +104,7 @@ if [[ -f $HOME/.zsh/antigen/antigen.zsh ]]; then
   bindkey '^j^t' anyframe-widget-tmux-attach
   bindkey '^v^v' anyframe-widget-vagrant
   bindkey '^v^j' anyframe-widget-vagrant-cdr
+  bindkey '^v^b' anyframe-widget-vagrant-box
 
   antigen-apply
 fi
