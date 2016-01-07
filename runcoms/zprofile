@@ -59,7 +59,7 @@ path=(
   $HOME/.cabal/bin               # haskel package manager
   $HOME/.anyenv/bin              # anyenv(plenv,ndenv,rbenv...)
   $GOPATH/bin                    # Go
-  /usr/texbin(N-/)               # tex
+  /usr/local/texlive/2015/bin/x86_64-darwin(N-/)
   /usr/local/heroku/bin(N-/)     # heroku toolbelt
   /usr/local/bin
   /usr/local/sbin
