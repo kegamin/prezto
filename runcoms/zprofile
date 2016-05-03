@@ -59,7 +59,7 @@ path=(
   $HOME/.cabal/bin               # haskel package manager
   $HOME/.anyenv/bin              # anyenv(plenv,ndenv,rbenv...)
   $GOPATH/bin                    # Go
-  /usr/local/texlive/2015/bin/x86_64-darwin(N-/)
+  /Library/TeX/texbin(N-/)
   /usr/local/heroku/bin(N-/)     # heroku toolbelt
   /usr/local/bin
   /usr/local/sbin
@@ -97,3 +97,8 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 #
 
 export GITHUB_URL=https://github.com/
+
+# bundle execを不要にする設定
+# [いちいちbundle execしたくない 決定版 - Qiita](http://qiita.com/ymmtmdk/items/374d5319e8d5c9ab2ff4)
+
+export RUBYGEMS_GEMDEPS=-
