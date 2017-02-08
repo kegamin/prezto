@@ -98,6 +98,13 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 
 export GITHUB_URL=https://github.com/
 
+# android studio
+
+export JAVA_HOME=`/usr/libexec/java_home`
+export STUDIO_JDK=${JAVA_HOME%/*/*}
+export ANDROID_HOME='/usr/local/opt/android-sdk'
+export PATH=$PATH:/usr/local/opt/android-sdk/tools:/usr/local/opt/android-sdk/platform-tools
+
 # bundle execを不要にする設定
 # [いちいちbundle execしたくない 決定版 - Qiita](http://qiita.com/ymmtmdk/items/374d5319e8d5c9ab2ff4)
 
